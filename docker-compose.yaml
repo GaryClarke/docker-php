@@ -6,11 +6,26 @@ services:
             - "80:80"
         volumes:
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    # php
     app:
         build:
             dockerfile: ./php/Dockerfile
         volumes:
             - ./app:/app
-    # php
     # mysql
+    db:
+        image: mysql:8.0
+        volumes:
+            - mysqldata:/var/lib/mysql
+        ports:
+            - "3306:3306"
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_USER: user
+            MYSQL_PASSWORD: secret
+            MYSQL_DATABASE: docker-php
     # redis
+
+volumes:
+    mysqldata:
