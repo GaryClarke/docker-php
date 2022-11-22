@@ -79,26 +79,26 @@
                 <a href="/">Translate another</a>
             <?php else: ?>
 
-            <p class="fs-5 mb-4">Select a language and enter your word(s).</p>
+                <p class="fs-5 mb-4">Select a language and enter your word(s).</p>
 
-            <form method="post">
-                <div class="row g-3">
-                    <div class="col">
-                        <select name="language" class="form-select" aria-label="Default select example">
-                            <option selected>Select a language</option>
+                <form method="post">
+                    <div class="row g-3">
+                        <div class="col">
+                            <select name="language" class="form-select" aria-label="Default select example">
+                                <option selected>Select a language</option>
                                 <option value="1">French</option>
                                 <option value="1">German</option>
                                 <option value="1">Spanish</option>
-                        </select>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input name="phrase" type="text" class="form-control" placeholder="Phrase" aria-label="Phrase">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-info" type="submit">Translate</button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <input name="phrase" type="text" class="form-control" placeholder="Phrase" aria-label="Phrase">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-outline-info" type="submit">Translate</button>
-                    </div>
-                </div>
-            </form>
+                </form>
 
             <?php endif; ?>
 
@@ -107,5 +107,4 @@
 </div>
 </body>
 </html>
-
 
