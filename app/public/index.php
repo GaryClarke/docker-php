@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+
+?>
 
 <!doctype html>
 <html lang="en">
