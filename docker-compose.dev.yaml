@@ -32,6 +32,8 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
     # redis
+    cache:
+        image: redis:latest
 
 volumes:
     mysqldata:
