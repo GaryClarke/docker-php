@@ -1,29 +1,37 @@
 services:
     # nginx
     web:
-        build:
-            dockerfile: ./nginx/Dockerfile
+        image: garyclarke/nginx-php:1.0
         ports:
             - "80:80"
-        volumes:
-            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
     # php
     app:
-        build:
-            dockerfile: ./php/Dockerfile
-            target: app
+        image: garyclarke/php-composer:1.2
+        environment:
+            MYSQL_HOST: db
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            REDIS_HOST: cache
+            REDIS_PORT: ${REDIS_PORT}
+        extra_hosts:
+            # Ensure that host.docker.internal is correctly defined on Linux
+            - host.docker.internal:host-gateway
     # mysql
     db:
         image: mysql:8.0
         volumes:
             - mysqldata:/var/lib/mysql
-        restart: unless-stopped
+        restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: secret
-            MYSQL_USER: user
-            MYSQL_PASSWORD: secret
-            MYSQL_DATABASE: docker-php
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
     # redis
+    cache:
+        image: redis:latest
 
 volumes:
     mysqldata:
